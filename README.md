@@ -26,3 +26,7 @@ Usage
     $api = new GoodReads('PUT YOUR API KEY HERE', 'writable directory for caching');
 # Call a method
     $data = $api->getLatestReads(4148474);
+
+License
+-------
+Simplified BSD (included).
