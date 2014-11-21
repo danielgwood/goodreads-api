@@ -21,10 +21,10 @@ Available methods
 
 Usage
 -----
-# Include class
-# Initialise wrapper
+1. Include class
+2. Initialise wrapper
     $api = new GoodReads('PUT YOUR API KEY HERE', 'writable directory for caching');
-# Call a method
+3. Call a method
     $data = $api->getLatestReads(4148474);
 
 License
