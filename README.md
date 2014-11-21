@@ -22,10 +22,8 @@ Available methods
 Usage
 -----
 1. Include class
-2. Initialise wrapper
-    $api = new GoodReads('PUT YOUR API KEY HERE', 'writable directory for caching');
-3. Call a method
-    $data = $api->getLatestReads(4148474);
+2. Initialise wrapper `$api = new GoodReads('PUT YOUR API KEY HERE', 'writable directory for caching');`
+3. Call a method `$data = $api->getLatestReads(4148474);`
 
 License
 -------
