@@ -17,7 +17,9 @@ Requirements
 
 Available methods
 -----------------
+* [author.show](https://www.goodreads.com/api#author.show)
 * [reviews.list](https://www.goodreads.com/api#reviews.list)
+* [user.show](https://www.goodreads.com/api#user.show)
 
 Usage
 -----
@@ -28,3 +30,10 @@ Usage
 License
 -------
 Simplified BSD (included).
+
+Changes
+-------
+
+2016-05-13 [Victor Davis](https://github.com/victordavis/goodreads-api)
+* Added LIBXML_NOCDATA arg to simplexml_load_string to capture CDATA in returned XML
+* Added 2 endpoints: author.show & user.show
