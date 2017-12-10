@@ -18,7 +18,12 @@ Requirements
 Available methods
 -----------------
 * [author.show](https://www.goodreads.com/api#author.show)
+* [author.books](https://www.goodreads.com/api#author.books)
+* [book.show](https://www.goodreads.com/api#book.show)
+* [book.show_by_isbn](https://www.goodreads.com/api#book.show_by_isbn)
+* [book.title](https://www.goodreads.com/api#book.title)
 * [reviews.list](https://www.goodreads.com/api#reviews.list)
+* [review.show](https://www.goodreads.com/api#review.show)
 * [user.show](https://www.goodreads.com/api#user.show)
 
 Usage
@@ -33,7 +38,8 @@ Simplified BSD (included).
 
 Changes
 -------
-2017-12-10 Daniel Wood
+2017-12-10 [Daniel G Wood](https://github.com/danielgwood)
+* Added 5 endpoints: author.books, book.show, book.show_by_isbn, book.title and review.show
 * Updated documentation.
 
 2016-05-13 [Victor Davis](https://github.com/victordavis/goodreads-api)

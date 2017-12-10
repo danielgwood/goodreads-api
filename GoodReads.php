@@ -3,9 +3,14 @@
  * A quick-and-dirty API class for GoodReads.
  *
  * Methods implemented:
- * - author.show
- * - reviews.list
- * - user.show
+ * - author.show (getAuthor)
+ * - author.books (getBooksByAuthor)
+ * - book.show (getBook)
+ * - book.show_by_isbn (getBookByISBN)
+ * - book.title (getBookByTitle)
+ * - reviews.list (getShelf|getLatestRead)
+ * - review.show (getReview)
+ * - user.show (getUser)
  *
  * @author danielgwood <github.com/danielgwood>
  */
@@ -15,26 +20,32 @@ class GoodReads
      * Root URL of the API (no trailing slash).
      */
     const API_URL = 'https://www.goodreads.com';
+
     /**
      * How long do cached items live for? (seconds)
      */
     const CACHE_TTL = 3600;
+
     /**
      * How long to sleep between requests to prevent flooding/TOS violation (milliseconds).
      */
     const SLEEP_BETWEEN_REQUESTS = 1000;
+
     /**
      * @var string Your API key.
      */
     protected $apiKey = '';
+
     /**
      * @var string Cache directory (defaults to ./cache).
      */
     protected $cacheDir = 'cache';
+
     /**
      * @var integer When was the last request made?
      */
     protected $lastRequestTime = 0;
+
     /**
      * Initialise the API wrapper instance.
      *
@@ -47,6 +58,7 @@ class GoodReads
         $this->cacheDir = (string)$cacheDirectory;
         $this->clearExpiredCache();
     }
+
     /**
      * Get details for a given author.
      *
@@ -63,6 +75,78 @@ class GoodReads
             )
         );
     }
+
+    /**
+     * Get books by a given author.
+     *
+     * @param  integer $authorId
+     * @param  integer $page     Optional page offset, 1-N
+     * @return array
+     */
+    public function getBooksByAuthor($authorId, $page = 1)
+    {
+        return $this->request(
+            'author/list',
+            array(
+                'key' => $this->apiKey,
+                'id' => (int)$authorId,
+                'page' => (int)$page
+            )
+        );
+    }
+
+    /**
+     * Get details for a given book.
+     *
+     * @param  integer $bookId
+     * @return array
+     */
+    public function getBook($bookId)
+    {
+        return $this->request(
+            'book/show',
+            array(
+                'key' => $this->apiKey,
+                'id' => (int)$bookId
+            )
+        );
+    }
+
+    /**
+     * Get details for a given book by ISBN.
+     *
+     * @param  string $isbn
+     * @return array
+     */
+    public function getBookByISBN($isbn)
+    {
+        return $this->request(
+            'book/isbn/' . urlencode($isbn),
+            array(
+                'key' => $this->apiKey
+            )
+        );
+    }
+
+    /**
+     * Get details for a given book by title.
+     *
+     * @param  string $title
+     * @param  string $author Optionally provide this for more accuracy.
+     * @return array
+     */
+    public function getBookByTitle($title, $author = '')
+    {
+        return $this->request(
+            'book/title',
+            array(
+                'key' => $this->apiKey,
+                'title' => urlencode($title),
+                'author' => $author
+            )
+        );
+    }
+
     /**
      * Get details for a given user.
      *
@@ -79,6 +163,26 @@ class GoodReads
             )
         );
     }
+
+    /**
+     * Get details for of a particular review
+     *
+     * @param  integer $reviewId
+     * @param  integer $page     Optional page number of comments, 1-N
+     * @return array
+     */
+    public function getReview($reviewId, $page = 1)
+    {
+        return $this->request(
+            'review/show',
+            array(
+                'key' => $this->apiKey,
+                'id' => (int)$reviewId,
+                'page' => (int)$page
+            )
+        );
+    }
+
     /**
      * Get a shelf for a given user.
      *
@@ -105,6 +209,7 @@ class GoodReads
             )
         );
     }
+
     /**
      * Get the details of an author.
      *
@@ -115,6 +220,7 @@ class GoodReads
     {
         return $this->getAuthor($authorId);
     }
+
     /**
      * Get the details of a user.
      *
@@ -125,6 +231,7 @@ class GoodReads
     {
         return $this->getUser($userId);
     }
+
     /**
      * Get the latest books read for a given user.
      *
@@ -138,6 +245,7 @@ class GoodReads
     {
         return $this->getShelf($userId, 'read', $sort, $limit, $page);
     }
+
     /**
      * Makes requests to the API.
      *
@@ -153,6 +261,7 @@ class GoodReads
         if($cachedData !== false) {
             return $cachedData;
         }
+
         // Prepare the URL and headers
         $url = self::API_URL .'/'. $endpoint . '?' . ((!empty($params)) ? http_build_query($params, '', '&') : '');
         $headers = array(
@@ -163,6 +272,7 @@ class GoodReads
                 'Accept: application/json',
             );
         }
+
         // Execute via CURL
         $response = null;
         if(extension_loaded('curl')) {
@@ -203,6 +313,7 @@ class GoodReads
             throw new Exception('Server error on "' . $url . '": ' . $response);
         }
     }
+
     /**
      * Attempt to get something from the cache.
      *
@@ -230,6 +341,7 @@ class GoodReads
             throw new Exception('Cache directory not writable.');
         }
     }
+
     /**
      * Add an item to the cache.
      *
@@ -249,6 +361,7 @@ class GoodReads
             throw new Exception('Cache directory not writable.');
         }
     }
+
     /**
      * Remove old cache items.
      */
