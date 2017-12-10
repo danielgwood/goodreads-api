@@ -3,7 +3,9 @@
  * A quick-and-dirty API class for GoodReads.
  *
  * Methods implemented:
+ * - author.show
  * - reviews.list
+ * - user.show
  *
  * @author danielgwood <github.com/danielgwood>
  */
@@ -184,7 +186,7 @@ class GoodReads
         } else {
             throw new Exception('CURL library not loaded!');
         }
-	
+
         // Try and cadge the results into a half-decent array
         $results = null;
         if(isset($params['format']) && $params['format'] === 'json') {
@@ -192,7 +194,7 @@ class GoodReads
         } else {
             $results = json_decode(json_encode((array)simplexml_load_string($body, 'SimpleXMLElement', LIBXML_NOCDATA)), 1); // I know, I'm a terrible human being
         }
-	
+
         if($results !== null) {
             // Cache & return results
             $this->addCache($endpoint, $params, $results);

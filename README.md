@@ -5,7 +5,7 @@ A quick PHP wrapper class for the GoodReads API.
 
 Disclaimer
 ----------
-This is something I hacked together quickly, it isn't beautiful, and as you'll see I only implemented one API endpoint (the only one I needed). However it's a good starting point, and from a cursory glance implementing other methods wouldn't be particularly tricky. Caching support is also baked in.
+This is something I hacked together quickly, it isn't beautiful, and can only access a few API endpoints. However it's a good starting point, and from a cursory glance implementing other methods wouldn't be particularly tricky. Caching support is also baked in.
 
 Please also bear in mind the GoodReads API itself isn't great (some methods for example only support XML!), you can read/comment on that in their forums.
 
@@ -33,6 +33,8 @@ Simplified BSD (included).
 
 Changes
 -------
+2017-12-10 Daniel Wood
+* Updated documentation.
 
 2016-05-13 [Victor Davis](https://github.com/victordavis/goodreads-api)
 * Added LIBXML_NOCDATA arg to simplexml_load_string to capture CDATA in returned XML
