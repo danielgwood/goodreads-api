@@ -8,7 +8,7 @@
  * - book.show (getBook)
  * - book.show_by_isbn (getBookByISBN)
  * - book.title (getBookByTitle)
- * - reviews.list (getShelf|getLatestRead)
+ * - reviews.list (getShelf|getLatestRead|getAllBooks)
  * - review.show (getReview)
  * - user.show (getUser)
  *
@@ -203,6 +203,31 @@ class GoodReads
                 'key' => $this->apiKey,
                 'id' => (int)$userId,
                 'shelf' => $shelf,
+                'sort' => $sort,
+                'page' => $page,
+                'per_page' => $limit
+            )
+        );
+    }
+
+    /**
+     * Get all books for a given user.
+     *
+     * @param  integer $userId
+     * @param  string  $sort   title|author|rating|year_pub|date_pub|date_read|date_added|avg_rating etc
+     * @param  integer $limit  1-200
+     * @param  integer $page   1-N
+     * @return array
+     */
+    public function getAllBooks($userId, $sort = 'title', $limit = 100, $page = 1)
+    {
+        return $this->request(
+            'review/list',
+            array(
+                'v' => 2,
+                'format' => 'xml',     // :( GoodReads still doesn't support JSON for this endpoint
+                'key' => $this->apiKey,
+                'id' => (int)$userId,
                 'sort' => $sort,
                 'page' => $page,
                 'per_page' => $limit
