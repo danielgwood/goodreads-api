@@ -38,6 +38,9 @@ Simplified BSD (included).
 
 Changes
 -------
+2018-03-04 [Tyler Paulson](https://github.com/tyler-paulson)
+* Added function to get all of a user's books, read or otherwise.
+
 2017-12-10 [Daniel G Wood](https://github.com/danielgwood)
 * Added 5 endpoints: author.books, book.show, book.show_by_isbn, book.title and review.show
 * Updated documentation.
