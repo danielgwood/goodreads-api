@@ -10,7 +10,7 @@
  * - book.title (getBookByTitle)
  * - reviews.list (getShelf|getLatestRead|getAllBooks)
  * - review.show (getReview)
- * - user.show (getUser)
+ * - user.show (getUser|getUserByUsername)
  *
  * @author danielgwood <github.com/danielgwood>
  */
@@ -160,6 +160,23 @@ class GoodReads
             array(
                 'key' => $this->apiKey,
                 'id' => (int)$userId
+            )
+        );
+    }
+
+    /**
+     * Get details for a given user by username.
+     *
+     * @param  string $username
+     * @return array
+     */
+    public function getUserByUsername($username)
+    {
+        return $this->request(
+            'user/show',
+            array(
+                'key' => $this->apiKey,
+                'username' => $username
             )
         );
     }
