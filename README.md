@@ -38,6 +38,9 @@ Simplified BSD (included).
 
 Changes
 -------
+2018-06-02 [Tyler Paulson](https://github.com/tyler-paulson)
+* Added function to get a user by username rather than ID.
+
 2018-03-04 [Tyler Paulson](https://github.com/tyler-paulson)
 * Added function to get all of a user's books, read or otherwise.
 
