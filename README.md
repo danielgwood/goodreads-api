@@ -3,6 +3,10 @@ goodreads-api
 
 A quick PHP wrapper class for the GoodReads API.
 
+**This repository is no longer maintained.** I stopped using GoodReads (moved to The StoryGraph), so I won't be updating this in future. **If you've created a newer/better PHP GoodReads API, let me know and I'll link it here.**
+
+---
+
 Disclaimer
 ----------
 This is something I hacked together quickly, it isn't beautiful, and can only access a few API endpoints. However it's a good starting point, and from a cursory glance implementing other methods wouldn't be particularly tricky. Caching support is also baked in.
